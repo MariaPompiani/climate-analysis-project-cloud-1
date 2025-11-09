@@ -1,0 +1,33 @@
+name: 'Data Pipeline - Run Daily'
+
+on:
+  # Gatilho 1: Rodar manualmente pela aba "Actions"
+  workflow_dispatch:
+
+  # Gatilho 2: Rodar em um agendamento 
+  schedule:
+    - cron: '0 9,21 * * *'
+
+jobs:
+  run-data-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v4
+
+      - name: 'Set up Python 3.10'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 'Install Dependencies'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 'Run Data Pipeline Script'
+        env:
+          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+          AZURE_STORAGE_CONN_STR: ${{ secrets.AZURE_STORAGE_CONN_STR }}
+          GITHUB_ACTIONS: "true"
+        run: python src/run_pipeline.py
