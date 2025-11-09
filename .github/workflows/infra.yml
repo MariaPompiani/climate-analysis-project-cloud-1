@@ -28,5 +28,5 @@ jobs:
         with:
           resourceGroupName: 'rg-climate-project-final' 
           template: ./iac/main.bicep
-          parameters: 'storageAccountName=stclima${{ github.run_id }}' 
+          parameters: 'storageAccountName=stclimaprojeto2025' 
           failOnStdErr: true
