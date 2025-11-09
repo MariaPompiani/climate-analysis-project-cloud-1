@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+.git
+.github
+.vscode
+iac/
+README.md
+TECHNICAL_REPORT.md

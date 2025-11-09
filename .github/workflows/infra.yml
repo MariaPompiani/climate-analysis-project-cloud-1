@@ -1,0 +1,32 @@
+name: 'IaC - Deploy Azure Storage'
+
+on:
+  # Gatilho 1: Rodar manualmente pela aba "Actions"
+  workflow_dispatch:
+  
+  # Gatilho 2: Rodar automaticamente se mudar algo na pasta iac/
+  push:
+    branches:
+      - main
+    paths:
+      - 'iac/**'
+
+jobs:
+  deploy-infra:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v4
+
+      - name: 'Azure Login'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Deploy Bicep File'
+        uses: azure/arm-deploy@v1
+        with:
+          resourceGroupName: 'rg-climate-project-final' 
+          template: ./iac/main.bicep
+          parameters: 'storageAccountName=stclima${{ github.run_id }}' 
+          failOnStdErr: true
