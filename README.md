@@ -1,11 +1,13 @@
-# climate-analysis-project-cloud-1# Climate Data Analysis System - Brazilian Capitals
+# Climate Data Analysis System - Brazilian Capitals
 
 This project, developed for the Cloud Computing course, implements an automated data pipeline to collect, process, and store climate and air pollution data from the 27 capital cities of Brazil, using the OpenWeather API and Microsoft Azure services.
 
 ## Team
 
-* **Student Name:** Maria Eduarda Pompiani
+* **Student:** Maria Eduarda Pompiani
+* **Student:** Matheus Rodrigues Gomes
 * **Email:** maria.esapc@puccampinas.edu.br
+* **Email:** 
 
 ## General Description
 
