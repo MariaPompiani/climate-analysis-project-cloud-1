@@ -68,7 +68,26 @@ The solution's security is guaranteed by the following mechanisms:
 * **`.dockerignore`:** Prevents unnecessary files (like `.git`, `.env`, `iac/`) from being copied into the Docker image, optimizing the build.
 
 ### Directory Structure
-The repository is organized as follows:
+The torage Account Definition:**
+```bicep
+@description('The name of the Storage Account (must be globally unique).')
+param storageAccountName string = 'st${uniqueString(resourceGroup().id)}'
+
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
+  name: storageAccountName
+  location: location
+  sku: {
+    name: 'Standard_LRS' 
+  }
+  kind: 'StorageV2'
+  properties: {
+    accessTier: 'Hot'
+    allowBlobPublicAccess: false
+    supportsHttpsTrafficOnly: true
+  }
+}
+```
+repository is organized as follows:
 ```text
 .
 ├── .github/workflows/   # CI/CD Definitions (infra.yml, pipeline.yml)
@@ -119,11 +138,8 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-Processed Data Container Definition:
+**Processed Data Container Definition:**
 ```bicep
-@description('The name of the processed data container.')
-param containerName string = 'processed-data'
-...
 resource processedContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-01-01' = {
   parent: blobService
   name: containerName
