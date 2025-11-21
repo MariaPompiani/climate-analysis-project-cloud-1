@@ -87,7 +87,8 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   }
 }
 ```
-repository is organized as follows:
+### Directory Structure
+The repository is organized as follows:
 ```text
 .
 ├── .github/workflows/   # CI/CD Definitions (infra.yml, pipeline.yml)
@@ -103,7 +104,7 @@ repository is organized as follows:
 ├── README.md            # Project documentation
 ├── requirements.txt     # Python dependencies
 └── TECHNICAL_REPORT.md  # This report
- 
+```
 
 ## 5. Azure Infrastructure
 
