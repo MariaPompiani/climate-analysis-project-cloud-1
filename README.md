@@ -4,10 +4,8 @@ This project, developed for the Cloud Computing course, implements an automated 
 
 ## Team
 
-* **Student:** Maria Eduarda Pompiani
-* **Student:** Matheus Rodrigues Gomes
-* **Email:** maria.esapc@puccampinas.edu.br
-* **Email:** 
+* **Student:** Maria Eduarda Pompiani — **ID:** [INSERT ID] — **Email:** maria.esapc@puccampinas.edu.br
+* **Student:** Matheus Rodrigues Gomes — **ID:** [INSERT ID] — **Email:** [INSERT EMAIL]
 
 ## General Description
 
@@ -59,32 +57,41 @@ graph TD
          Q -- (Read-Modify-Write) --> Q(CSVs per city);
     end
 
-    subgraph "Visualization (Pending)"
+    subgraph "Visualization"
         Q -- Power BI Connector --> T[Power BI Dashboard];
     end
 ```
 
 ## Demonstration
-(This section will be filled in after the dashboard is created)
 
-Dashboard Screenshots (Power BI):
+The analytical dashboard was developed in Microsoft Power BI, connecting directly to the processed data in Azure Blob Storage. Below are details and screenshots of the main system views:
 
-(Insert image of the analytical dashboard)
+### 1. Overview
+This dashboard serves as the command center for the project, offering a geospatial view of the 27 capitals. It aggregates high-level metrics, such as current temperature averages and active alerts, enabling a quick assessment of the national climate status. It allows users to instantly identify regions with extreme conditions before diving into specific metrics.
+![Overview Dashboard](resources/images/BI-Overview-climate-analysis-project-cloud-1.png)
 
-(Insert image with details of a specific city)
+### 2. Thermal Analysis
+This section provides a deep dive into thermal data, comparing nominal temperatures against "feels like" sensations. It includes time-series charts to track diurnal temperature variations and ranking visualizations to identify the hottest and coldest cities. This analysis is essential for understanding thermal comfort, heat islands, and seasonal variations across different regions.
+![Thermal Analysis Dashboard](resources/images/BI-Thermal-Analysis-climate-analysis-project-cloud-1.png)
 
-Link to Demo Video:
+### 3. Humidity Monitoring
+Dedicated to analyzing relative humidity percentages, this dashboard is vital for predicting precipitation and assessing dry air risks. The visualization uses color-coded indicators and threshold lines to highlight cities entering dangerous dryness levels (below 30%) or saturation points, supporting public health advisories regarding respiratory risks.
+![Humidity Monitoring Dashboard](resources/images/BI-Humidity-Monitoring-climate-analysis-project-cloud-1.png)
 
-(Insert link from YouTube, Stream, etc.)
+### 4. Wind Dynamics
+This view offers detailed insights into wind behavior, including speed and direction data. By visualizing wind patterns, users can understand air mass movements and ventilation in urban canyons. This data is particularly useful for meteorological studies, analyzing storm patterns, and understanding the potential dispersion of atmospheric pollutants.
+![Wind Dynamics Dashboard](resources/images/BI-Wind-Dinamics-climate-analysis-project-cloud-1.png)
+
+### 5. Air Quality
+A crucial dashboard for environmental assessment, tracking the concentration of major pollutants such as PM2.5, PM10, NO2, Ozone, and others. This view allows for the correlation of pollution levels with urban activity and weather conditions, providing key indicators for environmental compliance and public health monitoring in metropolitan areas.
+![Air Quality Dashboard](resources/images/BI-Air-Quality-climate-analysis-project-cloud-1.png)
+
+### Demo Video
+Check out the full video demonstration of the solution and the dashboard in action:
+* **[Link to Demo Video]** *(Insert YouTube/Stream link here)*
 
 ## References
-APIs:
-- OpenWeather API: https://openweathermap.org/api
-
-Azure Services:
-- Azure Blob Storage Documentation: https://docs.microsoft.com/en-us/azure/storage/blobs/
-- Azure Bicep Documentation: https://docs.microsoft.com/en-us/azure/bicep/
-
-Tools:
-- GitHub Actions: https://docs.github.com/en/actions
-- Pandas: https://pandas.pydata.org/
+* **Project Documentation:** [Technical Report](TECHNICAL_REPORT.md) - In-depth details on implementation.
+* **APIs:** [OpenWeather API](https://openweathermap.org/api)
+* **Azure Services:** [Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/) and [Azure Bicep](https://docs.microsoft.com/en-us/azure/bicep/)
+* **Tools:** [GitHub Actions](https://docs.github.com/en/actions) and [Pandas](https://pandas.pydata.org/)
