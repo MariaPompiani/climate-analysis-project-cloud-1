@@ -2,7 +2,9 @@
 
 **Course:** Cloud Computing
 **Semester/YEAR:** 2nd Semester / 2025
-**Team:** (Your Name / Student ID)
+**Team:** 
+* Maria Eduarda Pompiani 
+* Matheus Rodrigues Gomes 
 
 ---
 
@@ -66,6 +68,22 @@ The solution's security is guaranteed by the following mechanisms:
 * **`.dockerignore`:** Prevents unnecessary files (like `.git`, `.env`, `iac/`) from being copied into the Docker image, optimizing the build.
 
 ### Directory Structure
+The repository is organized as follows:
+```text
+.
+├── .github/workflows/   # CI/CD Definitions (infra.yml, pipeline.yml)
+├── iac/                 # Infrastructure as Code (main.bicep)
+├── resources/images/    # Documentation assets and Dashboard screenshots
+├── src/                 # Source code (run_pipeline.py)
+├── .dockerignore        # Docker exclusion rules
+├── .env_example         # Template for environment variables
+├── .gitignore           # Git exclusion rules
+├── BI-climate.pbix      # Power BI Project File
+├── docker-compose.yml   # Local development orchestration
+├── Dockerfile           # Container image definition
+├── README.md            # Project documentation
+├── requirements.txt     # Python dependencies
+└── TECHNICAL_REPORT.md  # This report
  
 
 ## 5. Azure Infrastructure
@@ -161,19 +179,41 @@ The pipeline was tested locally (via `docker-compose`) and in the GitHub Actions
 
 ## 8. Results and Demonstration
 
-*(This section will be filled in after the dashboard is created)*
+The analytical interface was developed using **Microsoft Power BI**, connecting directly to the Azure Blob Storage container `processed-data`. The dashboard offers a comprehensive view of the climate and air quality across Brazil.
 
-### Analytical Interface (Power BI)
+### 8.1. Analytical Interface
 
-The final visualization interface will be a Power BI dashboard. Power BI will connect directly to Azure Blob Storage, using the CSV files (e.g., `sao_paulo.csv`, `rio_de_janeiro.csv`) in the `processed-data` container as data sources.
+**Overview Dashboard:**
+This screen serves as the central command hub. It features a geospatial map displaying the 27 capitals, with color-coded bubbles (Red/Blue) indicating temperature extremes ("Heat Islands"). Key KPIs at the top show the selected capital's average temperature and humidity, along with a qualitative Air Quality status.
+*(See `resources/images/BI-Overview-climate-analysis-project-cloud-1.png` in the repository)*
 
-### Solution Limitations
+**Thermal Analysis:**
+This dashboard focuses on thermal comfort. It correlates the measured temperature (`temperature_c`) with the thermal sensation (`feels_like_c`) using scatter plots and line charts. It allows the identification of cities where high humidity exacerbates the feeling of heat, a critical metric for public health warnings.
+*(See `resources/images/BI-Thermal-Analysis-climate-analysis-project-cloud-1.png` in the repository)*
 
-* **"Append" Performance:** The `upload_or_append_to_blob_csv` logic implements a "Read-Modify-Write" pattern (read the entire CSV, add one row, write the entire CSV). As the CSV files grow (thousands of rows), the transaction cost (data egress and write) and execution time will increase.
-* **Processing Service:** Using GitHub Actions as a processing service is convenient but less integrated into the Azure ecosystem than an Azure Function or Azure Container App.
-* **Data Source:** The free OpenWeather API has call limits.
+**Humidity Monitoring:**
+Dedicated to analyzing relative humidity. The visuals highlight critical levels (below 30% or above 80%). It includes a gauge chart for the current average and a bar chart showing the daily progression of humidity versus temperature, aiding in the prediction of dry weather respiratory risks.
+*(See `resources/images/BI-Humidity-Monitoring-climate-analysis-project-cloud-1.png` in the repository)*
 
----
+**Wind Dynamics:**
+This view analyzes wind patterns using radar charts (Wind Rose concept) and line graphs. It visualizes wind speed (`wind_speed_ms`) and direction, providing insights into atmospheric circulation and potential pollutant dispersion patterns.
+*(See `resources/images/BI-Wind-Dinamics-climate-analysis-project-cloud-1.png` in the repository)*
+
+**Air Quality:**
+A critical environmental view that breaks down the Air Quality Index (AQI). Pie and area charts display the concentration of specific pollutants such as Particulate Matter (PM2.5, PM10), Nitrogen Dioxide (NO2), and Ozone (O3). This allows for a detailed assessment of pollution sources and trends over time.
+*(See `resources/images/BI-Air-Quality-climate-analysis-project-cloud-1.png` in the repository)*
+
+### 8.2. Metrics Obtained
+During the validation period, the system successfully processed data for all 27 capitals. Key metrics observed in the dashboard examples include:
+* **Average Temperature:** Ranges observed around ~25°C in the overview.
+* **Humidity Levels:** High variation, with averages around 72-75% in coastal areas.
+* **Wind Speeds:** Averages around 3-4 m/s.
+* **Pollution:** Detailed breakdown of PM2.5 and Ozone levels, crucial for urban environmental compliance.
+
+### 8.3. Solution Limitations
+* **"Append" Performance:** The `upload_or_append_to_blob_csv` logic implements a "Read-Modify-Write" pattern. As the CSV files grow (thousands of rows), the transaction cost (data egress and write) and execution time will increase linearly.
+* **Processing Service:** Using GitHub Actions as a processing service is convenient for this academic scope but is less integrated into the Azure ecosystem than an Azure Function.
+* **Data Source Limits:** The free tier of the OpenWeather API has call limits which restricts the frequency of updates (currently set to twice daily).
 
 ## 9. Conclusion and Future Work
 

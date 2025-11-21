@@ -4,8 +4,8 @@ This project, developed for the Cloud Computing course, implements an automated 
 
 ## Team
 
-* **Student:** Maria Eduarda Pompiani — **ID:** [INSERT ID] — **Email:** maria.esapc@puccampinas.edu.br
-* **Student:** Matheus Rodrigues Gomes — **ID:** [INSERT ID] — **Email:** [INSERT EMAIL]
+* **Student:** Maria Eduarda Pompiani — **Email:** maria.esapc@puccampinas.edu.br
+* **Student:** Matheus Rodrigues Gomes — **Email:** mattsgomes2003@gmail.com
 
 ## General Description
 
